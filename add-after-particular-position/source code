@@ -1,0 +1,82 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node 
+{
+    int data;
+    struct node *link;
+};
+void addafter(struct node *head,int loc,int num);
+void display(struct node *head);
+void disp(struct node *head);
+int main() {
+    int n,x;
+    printf("Enter the number of nodes:\n");
+    scanf("%d",&n);
+    struct node *head,*temp,*newnod;
+    scanf("%d",&x);
+    temp=malloc(sizeof(struct node));
+    temp->data=x;
+    temp->link=NULL;
+    head=temp;
+    for(int i=1;i<n;i++)
+    {
+        newnod=malloc(sizeof(struct node));
+        scanf("%d",&x);
+        newnod->data=x;
+        newnod->link=NULL;
+        head->link=newnod;
+        head=newnod;
+    }
+    head=temp;
+    printf("Enter the position after which you want to add another node\n");
+    int pos ,val;
+    scanf("%d",&pos);
+    printf("Enter the value\n");
+    scanf("%d",&val);
+    display(head);
+    addafter(head,n-pos,val);
+    disp(head);
+	return 0;
+}
+
+void addafter ( struct node *head, int loc, int num ) {
+    struct node *nnode,*ptr,*ptr1;
+    ptr=head;
+    for(int i=1;i<=loc;i++)
+    {
+        ptr=ptr->link;
+    }
+    ptr1=ptr->link;
+    nnode=malloc(sizeof(struct  node));
+    nnode->data=num;
+    nnode->link=ptr1;
+    ptr->link=nnode;
+}
+
+void display ( struct node *head) {
+    printf("The elements in the linked list are");
+    while(head!=NULL)
+    {
+        printf(" %d",head->data);
+        head=head->link;
+    }
+    printf("\n");
+}
+void disp(struct node *head)
+{
+    printf("The elements in the linked list after inserting at a specific position are");
+    while(head!=NULL)
+    {
+        printf(" %d",head->data);
+        head=head->link;
+    }
+}
